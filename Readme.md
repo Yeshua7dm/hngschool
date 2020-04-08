@@ -1,14 +1,16 @@
 This is a project for the second task of the PHP Training.
 To use this project, Wampserver or Xampp server ought ot be installed on the system.
-If it is a wampserver, copy/clone the project into the wamp64/www directory
-If it is a XamppServer, copy/clone the project into the xampp/htdocs directory
+
+If it is a wampserver, copy/clone the project into the wamp64/www directory.
+
+If it is a XamppServer, copy/clone the project into the xampp/htdocs directory.
 
 The SuperAdmin user's credentials are
-email: principal@hng.com
+email: principal@hng.com;
 password: test123
 
 Other users currently on the system are:
-joshua@olawale.com
+joshua@olawale.com and
 onifade@ayomide.com
 
 Both users have the same password as the SUperAdmin (test123)
@@ -25,5 +27,6 @@ The dashboard displays to the user:
 3. Date of Registration
 4. Date the user was last Logged in
 
-The Dashboards are in the dashboard directory of the project
+The Dashboards are in the dashboard directory of the project.
+
 The Users are saved in the db/users directory of the project
