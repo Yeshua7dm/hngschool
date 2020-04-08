@@ -7,7 +7,11 @@ The SuperAdmin user's credentials are
 email: principal@hng.com
 password: test123
 
-Other users currently on the system
+Other users currently on the system are:
+joshua@olawale.com
+onifade@ayomide.com
+
+Both users have the same password as the SUperAdmin (test123)
 
 On the start of the project, a new user can register by clicking the register link in the index.php page.
 Once he is registered successfully, he is directed to the login.php page where he can now login with his chosen credentials. He is directed to the a dashboard based on his designation which can either be Student, Teacher or Non-teaching Staff. ONLY THE SUPERADMIN CAN ADD ADMIN USERS.
