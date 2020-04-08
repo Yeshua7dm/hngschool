@@ -1,9 +1,13 @@
 This is a project for the second task of the PHP Training.
 To use this project, Wampserver or Xampp server ought ot be installed on the system.
+If it is a wampserver, copy/clone the project into the wamp64/www directory
+If it is a XamppServer, copy/clone the project into the xampp/htdocs directory
 
 The SuperAdmin user's credentials are
 email: principal@hng.com
 password: test123
+
+Other users currently on the system
 
 On the start of the project, a new user can register by clicking the register link in the index.php page.
 Once he is registered successfully, he is directed to the login.php page where he can now login with his chosen credentials. He is directed to the a dashboard based on his designation which can either be Student, Teacher or Non-teaching Staff. ONLY THE SUPERADMIN CAN ADD ADMIN USERS.
