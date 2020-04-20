@@ -1,6 +1,5 @@
 <?php
 session_start();
-include_once("lib/header.php");
 require_once('functions/alert.php');
 print_r($_POST);
 
@@ -86,6 +85,3 @@ if ($errorCount > 0) {
   $_SESSION["message"] = "New User Registration Successful!!";
   header("Location: ./dashboards/adminboard.php");
 }
-
-include_once("lib/footer.php");
-echo " | <a href='dashboards/adminboard.php'>Return to Dashboard</a>";

@@ -52,20 +52,17 @@ require_once('functions/alert.php');
     <select name="designation" id="" required>
       <option value="">---Select---</option>
       <option <?php
-              if (isset($_SESSION['designation']) && $_SESSION['designation'] == 'Non-Teaching Staff') {
+              if (isset($_SESSION['designation']) && $_SESSION['designation'] == 'Medical Team (MT)') {
                 echo 'selected';
               }
-              ?> value="Non-Teaching Staff">Non-Teaching Staff</option>
+              ?>>Medical Team (MT)
+      </option>
       <option <?php
-              if (isset($_SESSION['designation']) && $_SESSION['designation'] == 'Teacher') {
+              if (isset($_SESSION['designation']) && $_SESSION['designation'] == 'Patients') {
                 echo 'selected';
               }
-              ?> value="Teacher">Teacher</option>Teacher
-      <option <?php
-              if (isset($_SESSION['designation']) && $_SESSION['designation'] == 'Student') {
-                echo 'selected';
-              }
-              ?> value="Student">Student</option>
+              ?>>Patients
+      </option>
     </select>
   </p>
   <p>

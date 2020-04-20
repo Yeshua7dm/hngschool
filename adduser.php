@@ -16,7 +16,6 @@ require_once('functions/alert.php');
       header("Location:login.php");
     }
     printAlert();
-
     ?>
   </p>
 
@@ -45,34 +44,23 @@ require_once('functions/alert.php');
               if (isset($_SESSION['gender']) && $_SESSION['gender'] == 'Male') {
                 echo 'selected';
               }
-              ?> value="Male">Male</option>
+              ?>>Male
+      </option>
       <option <?php
               if (isset($_SESSION['gender']) && $_SESSION['gender'] == 'Female') {
                 echo 'selected';
               }
-              ?> value="Female">Female</option>
+              ?>>Female
+      </option>
     </select>
   </p>
   <p>
     <label for="designation">Degination and Role</label> <br>
     <select name="designation" id="" required>
       <option value="">---Select---</option>
-      <option <?php
-              if (isset($_SESSION['designation']) && $_SESSION['designation'] == 'Non-Teaching Staff') {
-                echo 'selected';
-              }
-              ?> value="Non-Teaching Staff">Non-Teaching Staff</option>
-      <option value="SuperAdmin">Admin</option>
-      <option <?php
-              if (isset($_SESSION['designation']) && $_SESSION['designation'] == 'Teacher') {
-                echo 'selected';
-              }
-              ?> value="Teacher">Teacher</option>Teacher
-      <option <?php
-              if (isset($_SESSION['designation']) && $_SESSION['designation'] == 'Student') {
-                echo 'selected';
-              }
-              ?> value="Student">Student</option>
+      <option>SuperAdmin</option>
+      <option>Medical Team (MT)</option>
+      <option>Patients</option>
     </select>
   </p>
   <p>

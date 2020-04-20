@@ -5,7 +5,9 @@
   "email": "onifade@ayomide.com",
   "gender": "Female",
   "password": "$2y$10$3Rix5wvEEP9W7VjnI9M7dO.4Jhh5SrVTvhtXDLIAcweFJFamGjxHW",
-  "designation": "Non-Teaching Staff",
+  "designation": "Patients",
   "department": "Cleaning",
-  "registrationDate": "Wednesday, 08 Apr, 2020"
+  "registrationDate": "Wednesday, 08 Apr, 2020",
+  "LastLoggedTime": "06:28pm",
+  "LastLoggedDate": "Monday, 20 Apr, 2020"
 }

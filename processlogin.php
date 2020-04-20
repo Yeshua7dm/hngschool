@@ -36,8 +36,6 @@ if ($errorCount > 0) {
       //check if the passwords match, then go to dashboard
       if ($userData->password == password_verify($password, $userData->password)) {
         // setAlertType('message', "Logged in!<br>");
-        $userData->LastLoggedTime = date("h:ia");
-        $userData->LastLoggedDate = date('l, d M, Y');
         //get all the data from the DB
         $_SESSION['email'] = $userData->email;
         $_SESSION['userID'] = $userData->id;
@@ -49,6 +47,7 @@ if ($errorCount > 0) {
         //
         $email = $_POST["email"] != "" ? $_POST["email"] : $errorCount++;
         //
+
         $_SESSION['lastLoginTime'] = $userData->LastLoggedTime != "" ? $userData->LastLoggedTime : "";
         $_SESSION['lastLoginDate'] = $userData->LastLoggedDate != "" ? $userData->LastLoggedDate : "";
         //then set the last logged in date to current date
@@ -58,19 +57,16 @@ if ($errorCount > 0) {
         file_put_contents("db/users/" . $currentUser, json_encode($userData));
 
         switch ($userData->designation) {
-          case 'Teacher':
-            header("Location: dashboards/teachersboard.php");
+          case 'Medical Team (MT)':
+
+            header("Location: dashboards/mtboard.php");
             break;
-          case 'Student':
-            header('Location: dashboards/studentboard.php');
+          case 'Patients':
+            header('Location: dashboards/patientsboard.php');
             break;
           case 'SuperAdmin':
             header("Location: dashboards/adminboard.php");
             break;
-          case 'Non-Teaching Staff':
-            header("Location: dashboards/ntsboard.php");
-            break;
-          default:
             header("Location: dashboard.php");
             break;
         }
