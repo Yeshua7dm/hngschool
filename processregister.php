@@ -41,7 +41,7 @@ if ($errorCount > 0) {
     die();
   }
   //validate email : valid, >=5, not empty, have @ and .
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
     $_SESSION['error'] = 'Your email is invalid! Please enter a valid email!';
     header('Location: register.php');
     die();

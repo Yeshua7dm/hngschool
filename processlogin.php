@@ -18,11 +18,21 @@ if ($errorCount > 0) {
     $sessionError .= "s";
   }
   setAlertType("error", $sessionError . " in your form submission");
-  // $_SESSION['error'] = $sessionError . " in your form submission";
-  // require('dashboards/')
+
   header("Location: login.php");
 } else {
-  //enter the database and save into 
+  //validate email : valid, >=5, not empty, have @ and .
+  if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
+    $_SESSION['error'] = 'Invalid Email Address! Please enter a valid email!';
+    header('Location: login.php');
+    die();
+  }
+  if (strlen($email) < 5) {
+    $_SESSION['error'] = 'Your email should contain at least 5 characters!';
+    header('Location: login.php');
+    die();
+  }
+  //enter the database
   $arrayOfUsers = scandir("db/users/");
   $foundUser = false;
   $passwordMatch = false;
@@ -42,12 +52,9 @@ if ($errorCount > 0) {
         $_SESSION['username'] = $userData->first_name . " " . $userData->last_name;
         $_SESSION['designation'] = $userData->designation;
         $_SESSION['department'] = $userData->department;
-        //current logged in time and date here
         $_SESSION['registrationDate'] = $userData->registrationDate;
-        //
-        $email = $_POST["email"] != "" ? $_POST["email"] : $errorCount++;
-        //
 
+        $email = $_POST["email"] != "" ? $_POST["email"] : $errorCount++;
         $_SESSION['lastLoginTime'] = $userData->LastLoggedTime != "" ? $userData->LastLoggedTime : "";
         $_SESSION['lastLoginDate'] = $userData->LastLoggedDate != "" ? $userData->LastLoggedDate : "";
         //then set the last logged in date to current date
@@ -58,15 +65,15 @@ if ($errorCount > 0) {
 
         switch ($userData->designation) {
           case 'Medical Team (MT)':
-
-            header("Location: dashboards/mtboard.php");
+            header("Location: mtboard.php");
             break;
           case 'Patients':
-            header('Location: dashboards/patientsboard.php');
+            header('Location: patientsboard.php');
             break;
           case 'SuperAdmin':
-            header("Location: dashboards/adminboard.php");
+            header("Location: adminboard.php");
             break;
+          default:
             header("Location: dashboard.php");
             break;
         }

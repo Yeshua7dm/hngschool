@@ -1,1 +1,1 @@
-document.onload("loaded");
+// document.onload = alert("loaded");

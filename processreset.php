@@ -84,7 +84,7 @@ if ($errorCount > 0) {
     //send a mail to the user to notify him of the change in password
     $to = $email;
     $subject = "Password Reset Completed";
-    $message = "Your account has just been updated, your password has changed. If you did not initiate the password change, visit localhost:3000 and reset your password immediately";
+    $message = "Your account has just been updated, your password has changed. If you did not initiate the password change, visit localhost/hngschool and reset your password immediately";
     $headers = 'FROM: no-reply@test.com' . "\r\n" . "CC: yeshua7dm@gmail.com";
     $sendMail = mail($to, $subject, $message, $headers);
 
@@ -92,7 +92,7 @@ if ($errorCount > 0) {
     $_SESSION['info'] = "Password reset Successful.";
     $_SESSION['email'] = $email;
     $_SESSION['message'] = '';
-    header("Location:dashboard.php");
+    header("Location:login.php");
   }
 }
 

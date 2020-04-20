@@ -38,17 +38,17 @@ if ($errorCount > 0) {
     die();
   }
   //TODO: validate email : valid, >=5, not empty, have @ and .
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $_SESSION['error'] = 'The email is invalid! Please enter a valid email!';
+  //validate email : valid, >=5, not empty, have @ and .
+  if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
+    $_SESSION['error'] = 'Invalid Email! Please enter a valid email!';
     header('Location: adduser.php');
     die();
   }
   if (strlen($email) < 5) {
-    $_SESSION['error'] = 'The email should contain at least 5 characters!';
+    $_SESSION['error'] = 'Your email should contain at least 5 characters!';
     header('Location: adduser.php');
     die();
   }
-
 
 
   //check the db/users directory for thr files in it
