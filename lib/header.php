@@ -21,9 +21,26 @@
         <a class="p-2 text-dark" href="login.php">Login</a>
         <a class="btn btn-primary" href="register.php">Register</a>
         <!-- <a class="p-2 text-dark" href="forgot.php">Forgot Password</a> -->
-      <?php } else { ?>
+      <?php }
+      if (isset($_SESSION['userID'])) { ?>
+        <a href=<?php
+                switch ($_SESSION['designation']) {
+                  case 'Medical Team (MT)':
+                    echo "mtboard.php";
+                    break;
+                  case 'Patients':
+                    echo "patientsboard.php";
+                    break;
+                  case 'SuperAdmin':
+                    echo "adminboard.php";
+                    break;
+                  default:
+                    echo "dashboard.php";
+                    break;
+                }
+                ?> class="p-2 text-dark">Dashboard</a>
+        <a class="p-2 text-dark" href="reset.php">Reset Password</a>
         <a class="p-2 text-dark" href='logout.php'>Log Out</a>
-        <!-- <a class="p-2 text-dark" href='reset.php'>Reset Password</a> -->
       <?php } ?>
       <!-- if (isset($_SESSION['designation']) && $_SESSION['designation'] == 'SuperAdmin') { ?>
         <a class="p-2 text-dark" href='adduser.php'>Add A New User</a> -->

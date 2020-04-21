@@ -23,16 +23,21 @@ if (!isset($_SESSION['userID'])) {
     <p>Designation: <?= $_SESSION['designation'] ?></p>
     <p>Department: <?= $_SESSION['department'] ?></p>
     <p>Registration Date: <?= $_SESSION['registrationDate'] ?></p>
-    <?php if (isset($_SESSION['lastLoginTime']) && isset($_SESSION['lastLoginDate'])) { ?>
+    <?php if (isset($_SESSION['lastLoginTime']) && $_SESSION['lastLoginTime'] != "" && isset($_SESSION['lastLoginDate']) && $_SESSION['lastLoginDate'] != '') { ?>
       <p>Last Logged In at: <?= $_SESSION['lastLoginTime'] ?>, Date: <?= $_SESSION['lastLoginDate'] ?></p>
+    <?php } else { ?>
+      <p>This is your first Log In</p>
+    <?php } ?>
   </div>
 
-  <div class="col-6">
-    <p>
-      <button class="btn btn-outline-secondary"><a class="p-2 text-dark" href='reset.php'>Reset Password</a></button>
+  <div class="row col-6">
+    <p class="m-1">
+      <button class="btn btn-outline-primary"><a class="p-1 text-info" href='bookappointment.php'>Book Appointment</a></button>
+    </p>
+    <p class="m-1">
+      <button class="btn btn-outline-success"><a class="p-1 text-success" href='paybill.php'>Pay Bill</a></button>
     </p>
   </div>
 </div>
 <?php
-    }
-    include_once("lib/footer.php") ?>
+include_once("lib/footer.php") ?>

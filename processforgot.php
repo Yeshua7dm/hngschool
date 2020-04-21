@@ -23,7 +23,7 @@ if ($errorCount > 0) {
 
       $to = $email;
       $subject = "Password Reset Link";
-      $message = "A password reset has been initiated on your account.\n If you did not initiate this request, please ignore this message. Otherwise, visit http://localhost:3000/reset.php?token=" . $token;
+      $message = "A password reset has been initiated on your account.\n If you did not initiate this request, please ignore this message. Otherwise, visit http://localhost/hngschool/reset.php?token=" . $token;
       $headers = 'FROM: no-reply@test.com' . "\r\n" . "CC: yeshua7dm@gmail.com";
       file_put_contents("./db/tokens/" . $email . ".json", json_encode(["token" => $token]));
       $sendMail = mail($to, $subject, $message, $headers);

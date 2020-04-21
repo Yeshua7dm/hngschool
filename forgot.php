@@ -11,6 +11,7 @@ require_once("functions/alert.php");
   <div class="row col-6">
     <?php
     printAlert();
+    session_unset();
     ?>
   </div>
   <div class="row col-6">

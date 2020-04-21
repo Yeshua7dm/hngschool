@@ -81,7 +81,6 @@ if ($errorCount > 0) {
     }
   }
   // write the data into a json file in the DB
-  // require('db/')
   file_put_contents("db/users/" . $email . ".json", json_encode($userData));
 
   //send the user to the login page after a succesful login by the user

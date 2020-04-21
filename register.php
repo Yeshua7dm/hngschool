@@ -14,17 +14,19 @@ require_once('functions/alert.php');
   <div class="row col-6">
     <p>All Fields are Required</p>
   </div>
+  <div class="row col-6">
+    <p>
+      <?php printAlert(); ?>
+    </p>
+  </div>
 
   <div class="row col-6">
     <form method="POST" action="processregister.php">
       <p>
-        <?php printAlert(); ?>
-      </p>
-      <p>
         <label for="firstName">First Name</label> <br>
-        <input class="form-control" <?php if (isset($_SESSION['firstname'])) {
-                                      echo "value=" . $_SESSION['firstname'];
-                                    } ?> type="text" name="firstname" id="" placeholder="First Name">
+        <input <?php if (isset($_SESSION['firstname'])) {
+                  echo "value=" . $_SESSION['firstname'];
+                } ?> class="form-control" type="text" name="firstname" id="" placeholder="First Name">
       </p>
       <p>
         <label for="lastName">Last Name</label> <br>
