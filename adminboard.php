@@ -26,13 +26,14 @@ if (!isset($_SESSION['userID'])) {
     <?php if (isset($_SESSION['lastLoginTime']) && isset($_SESSION['lastLoginDate'])) { ?>
       <p>Last Logged In at: <?= $_SESSION['lastLoginTime'] ?>, Date: <?= $_SESSION['lastLoginDate'] ?></p>
   </div>
-  <div class="col-6">
+  <div class="col-8">
     <p>
-      <button class="btn btn-outline-primary"><a class="p-2 text-info" href='adduser.php'>Add A New User</a></button>
-
-      <button class="btn btn-outline-secondary"><a class="p-2 text-dark" href='reset.php'>Reset Password</a></button>
+      <button class="btn btn-success"><a class="p-2 text-white" href='adduser.php'>Add A New User</a></button>
+      <button class="btn btn-primary"><a class="p-2 text-white" href='fetchstaff.php'>View All Staff</a></button>
+      <button class="btn btn-primary"><a class="p-2 text-white" href='fetchpatients.php'>View All Patients</a></button>
     </p>
   </div>
+
 </div>
 <?php
     }

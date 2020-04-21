@@ -6,10 +6,7 @@ require_once('functions/alert.php');
 
 <div class="container">
   <div class="row col-6">
-    <h3><a href="adminboard.php">SNG Dashboard</a></h3>
-  </div>
-  <div class="row col-6">
-    <h4>Add New User</h4>
+    <h3>Add New User</h3>
   </div>
   <div class="row col-6">
     <p>Kindly Note: All Fields are Required</p>
@@ -29,7 +26,7 @@ require_once('functions/alert.php');
     <form method="POST" action="processadduser.php">
       <p>
         <label for="firstName">First Name</label> <br>
-        <input class="form-control" placeholder="First Name">
+        <input class="form-control" name="firstname" placeholder="First Name">
       </p>
       <p>
         <label for="lastName">Last Name</label> <br>

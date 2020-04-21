@@ -1,4 +1,6 @@
-<?php include_once("lib/header.php");
+<?php
+session_start();
+include_once("lib/header.php");
 ?>
 
 

@@ -3,7 +3,7 @@ session_start();
 require_once('functions/alert.php');
 print_r($_POST);
 
-
+// die();
 $errorCount = 0;
 // use tenary operator to check if the fields are empty
 //compared to long list of if statements
@@ -83,5 +83,5 @@ if ($errorCount > 0) {
 
   //send the user to the login page after a succesful login by the user
   $_SESSION["message"] = "New User Registration Successful!!";
-  header("Location: ./dashboards/adminboard.php");
+  header("Location: adminboard.php");
 }
