@@ -1,8 +1,7 @@
 <?php
 session_start();
+require_once('functions/user.php');
 
-print_r($_POST);
-print_r($_SESSION);
 
 $errorCount = 0;
 // use tenary operator to check if the fields are empty
@@ -26,13 +25,9 @@ if ($errorCount > 0) {
   die();
 }
 
-// scan directory and count for number of appointments
-$appointments = scandir("db/appointments/");
-$count = count($appointments);
-$appointmentID = $count - 1;
 // save the data into an array and then json_encode the array
 $appointment = [
-  'id' => $appointmentID,
+  'id' => nextIDCount("db/appointments/"),
   'name' => $name,
   'date' => $date,
   'time' => $time,
@@ -50,5 +45,10 @@ $headers = 'FROM: no-reply@test.com' . "\r\n" . "CC: yeshua7dm@gmail.com";
 $sendMail = mail($to, $subject, $message, $headers);
 
 // return to dashboard
-setAlert('message', "Appointment Booked! A mail has been sent to you.");
+if ($sendMail) {
+  setAlert('message', "Appointment Booked! A mail has been sent to you.");
+} else {
+  setAlert('message', "Appointment Booked!");
+}
+
 header("Location: patientsboard.php");

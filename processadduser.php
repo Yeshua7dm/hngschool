@@ -1,7 +1,6 @@
 <?php
 session_start();
-require_once('functions/alert.php');
-print_r($_POST);
+require_once('functions/user.php');
 
 // die();
 $errorCount = 0;
@@ -26,38 +25,15 @@ if ($errorCount > 0) {
   setAlert('error', $sessionError . " in your form submission");
   header("Location: adduser.php");
 } else {
-  //TODO: validate name : no numbers+, >=2+, not empty+
-  if (strlen($firstname) < 2 || strlen($lastname) < 2) {
-    setAlert('error', 'The Name is shorter than the required length!');
-    header('Location: adduser.php');
-    die();
-  }
-  if (!preg_match("/^[a-zA-Z]*$/", $firstname) || !preg_match("/^[a-zA-Z]*$/", $lastname)) {
-    setAlert('error', 'The name should only contain letters, no numbers!');
-    header('Location: adduser.php');
-    die();
-  }
-  //TODO: validate email : valid, >=5, not empty, have @ and .
+  // validate names
+  validateNames($firstname, $lastname, 'adduser.php');
+
   //validate email : valid, >=5, not empty, have @ and .
-  if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
-    setAlert('error', 'Invalid Email! Please enter a valid email!');
-    header('Location: adduser.php');
-    die();
-  }
-  if (strlen($email) < 5) {
-    setAlert('error', 'Your email should contain at least 5 characters!');
-    header('Location: adduser.php');
-    die();
-  }
+  validateEmail($email, 'adduser.php');
 
-
-  //check the db/users directory for thr files in it
-  $arrayOfUsers = scandir("db/users/");
-  $usersCount = count($arrayOfUsers);
-  $newUserID = $usersCount - 1;
   // save the data into an array and then json_encode the array
   $userData = [
-    'id' => $newUserID,
+    'id' => nextIDCount("db/users/"),
     'first_name' => $firstname,
     'last_name' => $lastname,
     'email' => $email,
@@ -67,21 +43,16 @@ if ($errorCount > 0) {
     'department' => $department,
     'registrationDate' => date('l, d M, Y')
   ];
-
-  for ($i = 0; $i < $usersCount; $i++) {
-    # code...
-    $currentUser = $arrayOfUsers[$i];
-    if ($currentUser == $email . ".json") {
-      setAlert('error', "This User is Already Registered");
-      header("Location: adduser.php");
-      die();
-    }
+  $userExists = findUser($email);
+  if ($userExists) {
+    setAlert('error', "This User is Already Registered");
+    header("Location: adduser.php");
+    die();
+  } else {
+    // write the data into a json file in the DB
+    saveUser($userData);
+    //send the user to the login page after a succesful login by the user
+    setAlert('message', "New User Registration Successful!!");
+    header("Location: adminboard.php");
   }
-  // write the data into a json file in the DB
-  // require('db/')
-  file_put_contents("db/users/" . $email . ".json", json_encode($userData));
-
-  //send the user to the login page after a succesful login by the user
-  setAlert('message', "New User Registration Successful!!");
-  header("Location: adminboard.php");
 }

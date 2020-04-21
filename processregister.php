@@ -1,4 +1,5 @@
 <?php session_start();
+require_once('functions/user.php');
 
 $errorCount = 0;
 // use tenary operator to check if the fields are empty
@@ -30,37 +31,14 @@ if ($errorCount > 0) {
   header("Location: register.php");
 } else {
   //validate name : no numbers+, >=2+, not empty+
-  if (strlen($firstname) < 2 || strlen($lastname) < 2) {
-    setAlert('error', 'Your Name is shorter than the required length!');
-    header('Location: register.php');
-    die();
-  }
-  if (!preg_match("/^[a-zA-Z]*$/", $firstname) || !preg_match("/^[a-zA-Z]*$/", $lastname)) {
-    setAlert('error', 'Your name should only contain letters, no numbers!');
-    header('Location: register.php');
-    die();
-  }
+  validateNames($firstname, $lastname, 'register.php');
+
   //validate email : valid, >=5, not empty, have @ and .
-  if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
-    setAlert('error', 'Your email is invalid! Please enter a valid email!');
-    header('Location: register.php');
-    die();
-  }
-  if (strlen($email) < 5) {
-    setAlert('error', 'Your email should contain at least 5 characters!');
-    header('Location: register.php');
-    die();
-  }
+  validateEmail($email, 'register.php');
 
-
-
-  //check the db/users directory for thr files in it
-  $arrayOfUsers = scandir("db/users/");
-  $usersCount = count($arrayOfUsers);
-  $newUserID = $usersCount - 1;
   // save the data into an array and then json_encode the array
   $userData = [
-    'id' => $newUserID,
+    'id' => nextIDCount("db/users/"),
     'first_name' => $firstname,
     'last_name' => $lastname,
     'email' => $email,
@@ -71,19 +49,16 @@ if ($errorCount > 0) {
     'registrationDate' => date('l, d M, Y')
   ];
 
-  for ($i = 0; $i < $usersCount; $i++) {
-    # code...
-    $currentUser = $arrayOfUsers[$i];
-    if ($currentUser == $email . ".json") {
-      setAlert('error', "Registration failed! User Already Exists");
-      header("Location: register.php");
-      die();
-    }
+  $userExists = findUser($email);
+  if ($userExists) {
+    setAlert('error', "Registration failed! User Already Exists");
+    header("Location: register.php");
+    die();
+  } else {
+    // write the data into a json file in the DB
+    saveUser($userData);
+    //send the user to the login page after a succesful login by the user
+    setAlert('message', "Registration Successful!!");
+    header("Location: login.php");
   }
-  // write the data into a json file in the DB
-  file_put_contents("db/users/" . $email . ".json", json_encode($userData));
-
-  //send the user to the login page after a succesful login by the user
-  $_SESSION["message"] = "Registration Successful!!";
-  header("Location: login.php");
 }

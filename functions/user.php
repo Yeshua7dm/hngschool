@@ -47,3 +47,47 @@ function findUser($email = "")
   }
   return false;
 }
+//get thr next ID to use
+function nextIDCount($url = '')
+{
+  return count(scandir($url)) - 1;
+}
+//save user
+function saveUser($userObject)
+{
+  file_put_contents("db/users/" . $userObject['email'] . ".json", json_encode($userObject));
+}
+//update user on login
+function updateUser($userObject)
+{
+  file_put_contents("db/users/" . $userObject->email . ".json", json_encode($userObject));
+}
+
+function validateEmail($email = '', $location = '')
+{
+  //validate email : valid, >=5, not empty, have @ and .
+  if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
+    setAlert('error', 'Your email is invalid! Please enter a valid email!');
+    header('Location: ' . $location);
+    die();
+  }
+  if (strlen($email) < 5) {
+    setAlert('error', 'Your email should contain at least 5 characters!');
+    header('Location: ' . $location);
+    die();
+  }
+}
+
+function validateNames($firstname = '', $lastname = '', $location = '')
+{
+  if (strlen($firstname) < 2 || strlen($lastname) < 2) {
+    setAlert('error', 'Your Name is shorter than the required length!');
+    header('Location: ' . $location);
+    die();
+  }
+  if (!preg_match("/^[a-zA-Z]*$/", $firstname) || !preg_match("/^[a-zA-Z]*$/", $lastname)) {
+    setAlert('error', 'Your name should only contain letters, no numbers!');
+    header('Location: ' . $location);
+    die();
+  }
+}
