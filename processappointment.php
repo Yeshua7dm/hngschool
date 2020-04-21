@@ -21,7 +21,7 @@ if ($errorCount > 0) {
   if ($errorCount > 1) {
     $sessionError .= "s";
   }
-  $_SESSION['error'] = $sessionError . " in your form submission";
+  setAlert('error', $sessionError . " in your form submission");
   header("Location: bookappointment.php");
   die();
 }
@@ -50,5 +50,5 @@ $headers = 'FROM: no-reply@test.com' . "\r\n" . "CC: yeshua7dm@gmail.com";
 $sendMail = mail($to, $subject, $message, $headers);
 
 // return to dashboard
-$_SESSION["message"] = "Appointment Booked! A mail has been sent to you.";
+setAlert('message', "Appointment Booked! A mail has been sent to you.");
 header("Location: patientsboard.php");

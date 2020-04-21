@@ -1,13 +1,1 @@
-{
-  "id": 6,
-  "first_name": "Yeshua",
-  "last_name": "DMI",
-  "email": "yeshua7dm@gmail.com",
-  "gender": "Male",
-  "password": "$2y$10$dnIU7NVJbEIIKNjpKMn3seSHaRUzScNEupYiEF\/4jnJk1o3Rmi8w6",
-  "designation": "Medical Team (MT)",
-  "department": "IT",
-  "registrationDate": "Tuesday, 21 Apr, 2020",
-  "LastLoggedTime": "02:00am",
-  "LastLoggedDate": "Tuesday, 21 Apr, 2020"
-}
+{"id":6,"first_name":"Yeshua","last_name":"DMI","email":"yeshua7dm@gmail.com","gender":"Male","password":"$2y$10$dnIU7NVJbEIIKNjpKMn3seSHaRUzScNEupYiEF\/4jnJk1o3Rmi8w6","designation":"Medical Team (MT)","department":"Child Care","registrationDate":"Tuesday, 21 Apr, 2020","LastLoggedTime":"12:23pm","LastLoggedDate":"Tuesday, 21 Apr, 2020"}

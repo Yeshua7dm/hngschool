@@ -2,6 +2,7 @@
 session_start();
 include_once("lib/header.php");
 require_once("functions/alert.php");
+require_once('functions/user.php');
 ?>
 
 <div class="container">
@@ -11,7 +12,6 @@ require_once("functions/alert.php");
   <div class="row col-6">
     <?php
     printAlert();
-    session_unset();
     ?>
   </div>
   <div class="row col-6">
@@ -21,7 +21,7 @@ require_once("functions/alert.php");
     <form action="processforgot.php" method="post">
       <p>
         <label for="email">Email Address</label> <br>
-        <input <?php if (isset($_SESSION['email'])) {
+        <input <?php if (_isEmailSet()) {
                   echo "value=" . $_SESSION['email'];
                 } ?> class="form-control" type="email" name="email" id="" placeholder="Email Address">
       </p>

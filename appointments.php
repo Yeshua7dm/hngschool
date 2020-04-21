@@ -4,7 +4,7 @@ include_once("lib/header.php");
 
 //check if user is logged in first
 if (!isset($_SESSION['userID'])) {
-  $_SESSION['info'] = "You need to login to access the Dashboard";
+  setAlert('info', "You do not have access to that page");
   header("Location:login.php");
 }
 ?>

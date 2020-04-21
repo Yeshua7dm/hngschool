@@ -26,28 +26,28 @@ if ($errorCount > 0) {
   if ($errorCount > 1) {
     $sessionError .= "s";
   }
-  $_SESSION['error'] = $sessionError . " in your form submission";
+  setAlert('error', $sessionError . " in your form submission");
   header("Location: register.php");
 } else {
   //validate name : no numbers+, >=2+, not empty+
   if (strlen($firstname) < 2 || strlen($lastname) < 2) {
-    $_SESSION['error'] = 'Your Name is shorter than the required length!';
+    setAlert('error', 'Your Name is shorter than the required length!');
     header('Location: register.php');
     die();
   }
   if (!preg_match("/^[a-zA-Z]*$/", $firstname) || !preg_match("/^[a-zA-Z]*$/", $lastname)) {
-    $_SESSION['error'] = 'Your name should only contain letters, no numbers!';
+    setAlert('error', 'Your name should only contain letters, no numbers!');
     header('Location: register.php');
     die();
   }
   //validate email : valid, >=5, not empty, have @ and .
   if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
-    $_SESSION['error'] = 'Your email is invalid! Please enter a valid email!';
+    setAlert('error', 'Your email is invalid! Please enter a valid email!');
     header('Location: register.php');
     die();
   }
   if (strlen($email) < 5) {
-    $_SESSION['error'] = 'Your email should contain at least 5 characters!';
+    setAlert('error', 'Your email should contain at least 5 characters!');
     header('Location: register.php');
     die();
   }
@@ -55,7 +55,7 @@ if ($errorCount > 0) {
 
 
   //check the db/users directory for thr files in it
-  $arrayOfUsers = scandir("./db/users/");
+  $arrayOfUsers = scandir("db/users/");
   $usersCount = count($arrayOfUsers);
   $newUserID = $usersCount - 1;
   // save the data into an array and then json_encode the array
@@ -75,7 +75,7 @@ if ($errorCount > 0) {
     # code...
     $currentUser = $arrayOfUsers[$i];
     if ($currentUser == $email . ".json") {
-      $_SESSION['error'] = "Registration failed! User Already Exists";
+      setAlert('error', "Registration failed! User Already Exists");
       header("Location: register.php");
       die();
     }

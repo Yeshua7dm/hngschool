@@ -22,7 +22,7 @@ if ($errorCount > 0) {
   if ($errorCount > 1) {
     $sessionError .= "s";
   }
-  $_SESSION['error'] = $sessionError . " in your form submission";
+  setAlert('error', $sessionError . " in your form submission");
   if (!isset($_SESSION['userID'])) {
     header("Location: reset.php?token=" . $token);
   } else {
@@ -34,21 +34,21 @@ if ($errorCount > 0) {
     # all the code here now
     $foundUser = false;
     //loop through the dir of and find the file
-    $tokenDir = scandir("./db/tokens/");
+    $tokenDir = scandir("db/tokens/");
     for ($i = 0; $i < count($tokenDir); $i++) {
       // check if the user exists
       $currentTokenFile = $tokenDir[$i];
       if ($currentTokenFile == $email . '.json') {
-        $tokenObject = json_decode(file_get_contents("./db/tokens/" . $currentTokenFile));
+        $tokenObject = json_decode(file_get_contents("db/tokens/" . $currentTokenFile));
 
         if ($tokenObject->token === $token) {
           // get the substring that is email
           $foundUser = true;
           echo "User can update password";
-          $userData = json_decode(file_get_contents("./db/users/" . $currentTokenFile));
+          $userData = json_decode(file_get_contents("db/users/" . $currentTokenFile));
           $userData->password = password_hash($password, PASSWORD_DEFAULT);
-          file_put_contents("./db/users/" . $currentTokenFile, json_encode($userData));
-          unlink("./db/tokens/" . $currentTokenFile);
+          file_put_contents("db/users/" . $currentTokenFile, json_encode($userData));
+          unlink("db/tokens/" . $currentTokenFile);
 
           //send a mail to the user to notify him of the change in password
           $to = $email;
@@ -58,11 +58,11 @@ if ($errorCount > 0) {
           $sendMail = mail($to, $subject, $message, $headers);
 
           //send session to login for user to login
-          $_SESSION['info'] = "Password reset Successful. Please Log in with New password";
+          setAlert('info', "Password reset Successful. Please Log in with New password");
           $_SESSION['email'] = $email;
           header("Location:login.php");
         } else {
-          $_SESSION['error'] = 'Password Reset Failed. Invalid/Expired Token!';
+          setAlert('error', 'Password Reset Failed. Invalid/Expired Token!');
           header('Location:forgot.php');
           die();
         }
@@ -72,14 +72,14 @@ if ($errorCount > 0) {
     }
 
     if ($foundUser == false) {
-      $_SESSION['error'] = 'Password Reset Failed. Invalid Email Address!';
+      setAlert('error', 'Password Reset Failed. Invalid Email Address!');
       header('Location:login.php');
     }
     // if user is logged in and not using token
   } else {
-    $userData = json_decode(file_get_contents("./db/users/" . $email . ".json"));
+    $userData = json_decode(file_get_contents("db/users/" . $email . ".json"));
     $userData->password = password_hash($password, PASSWORD_DEFAULT);
-    file_put_contents("./db/users/" . $email . ".json", json_encode($userData));
+    file_put_contents("db/users/" . $email . ".json", json_encode($userData));
 
     //send a mail to the user to notify him of the change in password
     $to = $email;
@@ -89,18 +89,12 @@ if ($errorCount > 0) {
     $sendMail = mail($to, $subject, $message, $headers);
 
     //send session to login for user to login
-    $_SESSION['info'] = "Password reset Successful.";
+    setAlert('info', "Password reset Successful.");
     $_SESSION['email'] = $email;
-    $_SESSION['message'] = '';
     header("Location:login.php");
   }
 }
 
-//check if the user with the email exists
-
-
-
 ?>
-
 <?php
 include_once("lib/footer.php");

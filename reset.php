@@ -13,8 +13,8 @@ require_once("functions/user.php");
   </div>
   <div class="row col-6">
     <?php
-    if (!_isTokenSet() && !_isUserLogged()) {
-      setAlertType('error', "You are not authorized to view that page");
+    if (!_isUserLogged() && !_isTokenSet()) {
+      setAlert('error', "You are not authorized to view that page");
       header("Location: login.php");
     }
     printAlert();
@@ -34,8 +34,14 @@ require_once("functions/user.php");
       </p>
 
       <?php
-      if (_isEmailSet()) { ?>
-        <input type="hidden" name="token" value="<?= $_GET['token'] ?>">
+      if (!_isEmailSet()) { ?>
+        <input <?php
+                if (_isTokenSetinSession()) {
+                  echo "value='" . $_SESSION['token'] . "'";
+                } else {
+                  echo "value='" . $_GET['token'] . "'";
+                }
+                ?> type="hidden" name="token">
       <?php
       }
       ?>

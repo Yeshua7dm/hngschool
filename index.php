@@ -1,9 +1,12 @@
 <?php
 session_start();
 include_once("lib/header.php");
+require_once('functions/alert.php');
 ?>
 
-
+<?php
+printAlert();
+?>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <h1 class="display-4">Welcome to Start NG Hospital</h1>

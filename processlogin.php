@@ -17,18 +17,18 @@ if ($errorCount > 0) {
   if ($errorCount > 1) {
     $sessionError .= "s";
   }
-  setAlertType("error", $sessionError . " in your form submission");
+  setAlert("error", $sessionError . " in your form submission");
 
   header("Location: login.php");
 } else {
   //validate email : valid, >=5, not empty, have @ and .
   if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
-    $_SESSION['error'] = 'Invalid Email Address! Please enter a valid email!';
+    setAlert('error', 'Invalid Email Address! Please enter a valid email!');
     header('Location: login.php');
     die();
   }
   if (strlen($email) < 5) {
-    $_SESSION['error'] = 'Your email should contain at least 5 characters!';
+    setAlert('error', 'Your email should contain at least 5 characters!');
     header('Location: login.php');
     die();
   }
@@ -45,7 +45,7 @@ if ($errorCount > 0) {
       $userData = json_decode(file_get_contents("db/users/" . $currentUser));
       //check if the passwords match, then go to dashboard
       if ($userData->password == password_verify($password, $userData->password)) {
-        // setAlertType('message', "Logged in!<br>");
+        // setAlert('message', "Logged in!<br>");
         //get all the data from the DB
         $_SESSION['email'] = $userData->email;
         $_SESSION['userID'] = $userData->id;
@@ -53,8 +53,6 @@ if ($errorCount > 0) {
         $_SESSION['designation'] = $userData->designation;
         $_SESSION['department'] = $userData->department;
         $_SESSION['registrationDate'] = $userData->registrationDate;
-
-        $email = $_POST["email"] != "" ? $_POST["email"] : $errorCount++;
         $_SESSION['lastLoginTime'] = $userData->LastLoggedTime != "" ? $userData->LastLoggedTime : "";
         $_SESSION['lastLoginDate'] = $userData->LastLoggedDate != "" ? $userData->LastLoggedDate : "";
         //then set the last logged in date to current date
@@ -78,7 +76,7 @@ if ($errorCount > 0) {
             break;
         }
       } else {
-        setAlertType('error', 'Invalid Password supplied');
+        setAlert('error', 'Invalid Password supplied');
         header("Location: login.php");
       }
       $foundUser = true;
@@ -86,9 +84,7 @@ if ($errorCount > 0) {
   }
 
   if ($foundUser == false) {
-    setAlertType('error', 'Sorry, User not found! Register here!');
-    // $_SESSION['error'] = 'Sorry, User not found! Register here!';
+    setAlert('error', 'Sorry, User not found! Register here!');
     header("Location: register.php");
-    // session_destroy();
   }
 }

@@ -23,36 +23,36 @@ if ($errorCount > 0) {
   if ($errorCount > 1) {
     $sessionError .= "s";
   }
-  $_SESSION['error'] = $sessionError . " in your form submission";
+  setAlert('error', $sessionError . " in your form submission");
   header("Location: adduser.php");
 } else {
   //TODO: validate name : no numbers+, >=2+, not empty+
   if (strlen($firstname) < 2 || strlen($lastname) < 2) {
-    $_SESSION['error'] = 'The Name is shorter than the required length!';
+    setAlert('error', 'The Name is shorter than the required length!');
     header('Location: adduser.php');
     die();
   }
   if (!preg_match("/^[a-zA-Z]*$/", $firstname) || !preg_match("/^[a-zA-Z]*$/", $lastname)) {
-    $_SESSION['error'] = 'The name should only contain letters, no numbers!';
+    setAlert('error', 'The name should only contain letters, no numbers!');
     header('Location: adduser.php');
     die();
   }
   //TODO: validate email : valid, >=5, not empty, have @ and .
   //validate email : valid, >=5, not empty, have @ and .
   if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
-    $_SESSION['error'] = 'Invalid Email! Please enter a valid email!';
+    setAlert('error', 'Invalid Email! Please enter a valid email!');
     header('Location: adduser.php');
     die();
   }
   if (strlen($email) < 5) {
-    $_SESSION['error'] = 'Your email should contain at least 5 characters!';
+    setAlert('error', 'Your email should contain at least 5 characters!');
     header('Location: adduser.php');
     die();
   }
 
 
   //check the db/users directory for thr files in it
-  $arrayOfUsers = scandir("./db/users/");
+  $arrayOfUsers = scandir("db/users/");
   $usersCount = count($arrayOfUsers);
   $newUserID = $usersCount - 1;
   // save the data into an array and then json_encode the array
@@ -72,7 +72,7 @@ if ($errorCount > 0) {
     # code...
     $currentUser = $arrayOfUsers[$i];
     if ($currentUser == $email . ".json") {
-      $_SESSION['error'] = "This User is Already Registered";
+      setAlert('error', "This User is Already Registered");
       header("Location: adduser.php");
       die();
     }
@@ -82,6 +82,6 @@ if ($errorCount > 0) {
   file_put_contents("db/users/" . $email . ".json", json_encode($userData));
 
   //send the user to the login page after a succesful login by the user
-  $_SESSION["message"] = "New User Registration Successful!!";
+  setAlert('message', "New User Registration Successful!!");
   header("Location: adminboard.php");
 }

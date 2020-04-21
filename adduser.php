@@ -15,7 +15,7 @@ require_once('functions/alert.php');
     <p>
       <?php
       if (!isset($_SESSION['userID']) && $_SESSION['designation'] !== 'SuperAdmin') {
-        $_SESSION['info'] = "You do not have access to that page";
+        setAlert('info', "You do not have access to that page");
         header("Location:login.php");
       }
       printAlert();
