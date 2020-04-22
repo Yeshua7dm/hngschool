@@ -2,4 +2,5 @@
 
 session_unset();
 session_destroy();
-header("Location: login.php");
+require_once('functions/redirect.php');
+redirect("index.php");

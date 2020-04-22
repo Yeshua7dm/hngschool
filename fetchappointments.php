@@ -1,7 +1,6 @@
 <?php
 session_start();
-
-print_r($_SESSION);
+require_once('functions/redirect.php');
 
 /**
  * scan the directory of appointments into an array
@@ -23,4 +22,4 @@ for ($i = 0; $i < count($arrayAppointments); $i++) {
 
 print_r($appointments);
 $_SESSION['appointments'] = $appointments;
-header('location: appointments.php');
+redirect("appointments.php");

@@ -2,11 +2,12 @@
 session_start();
 include_once("lib/header.php");
 require_once('functions/alert.php');
+require_once('functions/redirect.php');
 
 //check if user is logged in first
 if (!isset($_SESSION['userID'])) {
   setAlert('info', "You do not have access to that page");
-  header("Location:login.php");
+  redirect("login.php");
 }
 ?>
 <div class="container">

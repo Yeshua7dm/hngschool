@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('functions/user.php');
+require_once('functions/redirect.php');
 date_default_timezone_set("Africa/Lagos"); //set the default time zone to Lagos
 
 $errorCount = 0;
@@ -19,7 +20,7 @@ if ($errorCount > 0) {
   }
   setAlert("error", $sessionError . " in your form submission");
 
-  header("Location: login.php");
+  redirect("login.php");
 } else {
   //validate email : valid, >=5, not empty, have @ and .
   validateEmail($email, 'login.php');
@@ -47,24 +48,24 @@ if ($errorCount > 0) {
 
       switch ($userData->designation) {
         case 'Medical Team (MT)':
-          header("Location: mtboard.php");
+          redirect("mtboard.php");
           break;
         case 'Patients':
-          header('Location: patientsboard.php');
+          redirect("patientsboard.php");
           break;
         case 'SuperAdmin':
-          header("Location: adminboard.php");
+          redirect("adminboard.php");
           break;
         default:
-          header("Location: dashboard.php");
+          redirect("dashboard.php");
           break;
       }
     } else {
       setAlert('error', 'Invalid Password supplied');
-      header("Location: login.php");
+      redirect("login.php");
     }
   } else {
     setAlert('error', 'Sorry, User not found! Register here!');
-    header("Location: register.php");
+    redirect("register.php");
   }
 }

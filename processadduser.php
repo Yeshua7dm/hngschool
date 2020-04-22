@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('functions/user.php');
+require_once("functions/redirect.php");
 
 // die();
 $errorCount = 0;
@@ -23,7 +24,7 @@ if ($errorCount > 0) {
     $sessionError .= "s";
   }
   setAlert('error', $sessionError . " in your form submission");
-  header("Location: adduser.php");
+  redirect("adduser.php");
 } else {
   // validate names
   validateNames($firstname, $lastname, 'adduser.php');
@@ -46,13 +47,13 @@ if ($errorCount > 0) {
   $userExists = findUser($email);
   if ($userExists) {
     setAlert('error', "This User is Already Registered");
-    header("Location: adduser.php");
+    redirect("adduser.php");
     die();
   } else {
     // write the data into a json file in the DB
     saveUser($userData);
     //send the user to the login page after a succesful login by the user
     setAlert('message', "New User Registration Successful!!");
-    header("Location: adminboard.php");
+    redirect("adminboard.php");
   }
 }

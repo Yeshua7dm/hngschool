@@ -1,5 +1,6 @@
 <?php
 include_once('alert.php');
+include_once('redirect.php');
 
 // token set in get
 function _isTokenSetinGet()
@@ -68,12 +69,12 @@ function validateEmail($email = '', $location = '')
   //validate email : valid, >=5, not empty, have @ and .
   if (!preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email)) {
     setAlert('error', 'Your email is invalid! Please enter a valid email!');
-    header('Location: ' . $location);
+    redirect($location);
     die();
   }
   if (strlen($email) < 5) {
     setAlert('error', 'Your email should contain at least 5 characters!');
-    header('Location: ' . $location);
+    redirect($location);
     die();
   }
 }
@@ -82,12 +83,12 @@ function validateNames($firstname = '', $lastname = '', $location = '')
 {
   if (strlen($firstname) < 2 || strlen($lastname) < 2) {
     setAlert('error', 'Your Name is shorter than the required length!');
-    header('Location: ' . $location);
+    redirect($location);
     die();
   }
   if (!preg_match("/^[a-zA-Z]*$/", $firstname) || !preg_match("/^[a-zA-Z]*$/", $lastname)) {
     setAlert('error', 'Your name should only contain letters, no numbers!');
-    header('Location: ' . $location);
+    redirect($location);
     die();
   }
 }

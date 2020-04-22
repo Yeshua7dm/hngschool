@@ -1,5 +1,6 @@
 <?php session_start();
 require_once('functions/user.php');
+require_once('functions/redirect.php');
 
 $errorCount = 0;
 // use tenary operator to check if the fields are empty
@@ -28,7 +29,7 @@ if ($errorCount > 0) {
     $sessionError .= "s";
   }
   setAlert('error', $sessionError . " in your form submission");
-  header("Location: register.php");
+  redirect("register.php");
 } else {
   //validate name : no numbers+, >=2+, not empty+
   validateNames($firstname, $lastname, 'register.php');
@@ -52,13 +53,13 @@ if ($errorCount > 0) {
   $userExists = findUser($email);
   if ($userExists) {
     setAlert('error', "Registration failed! User Already Exists");
-    header("Location: register.php");
+    redirect("register.php");
     die();
   } else {
     // write the data into a json file in the DB
     saveUser($userData);
     //send the user to the login page after a succesful login by the user
     setAlert('message', "Registration Successful!!");
-    header("Location: login.php");
+    redirect("login.php");
   }
 }

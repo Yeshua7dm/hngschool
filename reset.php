@@ -3,6 +3,7 @@ session_start();
 include_once("lib/header.php");
 require_once("functions/alert.php");
 require_once("functions/user.php");
+require_once("functions/redirect.php");
 ?>
 <div class="container">
   <div class="row col-6">
@@ -15,7 +16,7 @@ require_once("functions/user.php");
     <?php
     if (!_isUserLogged() && !_isTokenSet()) {
       setAlert('error', "You are not authorized to view that page");
-      header("Location: login.php");
+      redirect("login.php");
     }
     printAlert();
     ?>
@@ -25,12 +26,12 @@ require_once("functions/user.php");
       <p>
         <label for="email">Email Address</label> <br>
         <input <?php if (_isEmailSet()) {
-                  echo "value='" . $_SESSION['email'] . "' readonly";
+                  echo "value='" . $_SESSION['email'] . "'";
                 } ?> class="form-control" type="email" name="email" placeholder="Email Address">
       </p>
       <p>
         <label for="password">New Password</label> <br>
-        <input class="form-control" type="password" name="password" id="" placeholder="New Password">
+        <input class="form-control" type="password" name="password" placeholder="New Password">
       </p>
 
       <?php

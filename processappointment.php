@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once('functions/user.php');
+require_once('functions/redirect.php');
+require_once('functions/email.php');
 
 
 $errorCount = 0;
@@ -21,7 +23,7 @@ if ($errorCount > 0) {
     $sessionError .= "s";
   }
   setAlert('error', $sessionError . " in your form submission");
-  header("Location: bookappointment.php");
+  redirect("bookappointment.php");
   die();
 }
 
@@ -38,11 +40,9 @@ $appointment = [
 //push the array into a file saved with email of patient and date of appointment
 file_put_contents("db/appointments/" . $email . "-" . $date . ".json", json_encode($appointment));
 
-$to = $email;
-$subject = "Appointment Booked";
+$subject = "Appointment Booking";
 $message = "You have successfully booked an appointment stated for " . $time . " on " . $date . " with the " . $department . " department. Please keep to time.\nThanks";
-$headers = 'FROM: no-reply@test.com' . "\r\n" . "CC: yeshua7dm@gmail.com";
-$sendMail = mail($to, $subject, $message, $headers);
+$sendMail = sendEmail($subject, $message, $email);
 
 // return to dashboard
 if ($sendMail) {
@@ -51,4 +51,4 @@ if ($sendMail) {
   setAlert('message', "Appointment Booked!");
 }
 
-header("Location: patientsboard.php");
+redirect("patientsboard.php");
