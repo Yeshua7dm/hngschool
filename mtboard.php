@@ -32,9 +32,7 @@ if (!isset($_SESSION['userID'])) {
   </div>
   <div class="row col-6">
     <p>
-      <button class="btn btn-bg btn-outline-primary">
-        <a class="p-2 text-info" href="fetchappointments.php">View Pending Appointments</a>
-      </button>
+      <a class="p-2 btn btn-bg btn-outline-primary" href="fetchappointments.php">Booked Appointments</a>
     </p>
 
   </div>

@@ -1,13 +1,1 @@
-{
-  "id": 8,
-  "first_name": "Joshua",
-  "last_name": "Eric",
-  "email": "md@sng.com",
-  "gender": "Male",
-  "password": "$2y$10$HuMR2PpcIwtnZDnZHdiYUuQzpq9yYLDJw\/WaJRk8\/CRSNlDWIzdBW",
-  "designation": "SuperAdmin",
-  "department": "Medical Director",
-  "registrationDate": "Tuesday, 21 Apr, 2020",
-  "LastLoggedTime": "05:31pm",
-  "LastLoggedDate": "Sunday, 03 May, 2020"
-}
+{"id":8,"first_name":"Joshua","last_name":"Eric","email":"md@sng.com","gender":"Male","password":"$2y$10$HuMR2PpcIwtnZDnZHdiYUuQzpq9yYLDJw\/WaJRk8\/CRSNlDWIzdBW","designation":"SuperAdmin","department":"Medical Director","registrationDate":"Tuesday, 21 Apr, 2020","LastLoggedTime":"08:04pm","LastLoggedDate":"Sunday, 03 May, 2020"}

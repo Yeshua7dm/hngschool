@@ -62,16 +62,10 @@ if (isset($_GET['txref'])) {
   $chargeAmount = $resp['data']['amount'];
   $chargeCurrency = $resp['data']['currency'];
 
-  if (($chargeResponsecode == "00" || $chargeResponsecode == "0")) { //&& ($chargeCurrency == $currency)
+  if (($chargeResponsecode == "00" || $chargeResponsecode == "0") && ($chargeAmount == $amount)  && ($chargeCurrency == $currency)) {
     // transaction was successful...
     // please check other things like whether you already gave value for this ref
     // if the email matches the customer who owns the product etc
-    /**
-     * TODO: mail user
-     * uodate appointments db
-     * send successful alert msg
-     * return to patientsboard.php
-     */
     // update appointments db'
     $paidAppointment = $email . '-' . $date . '.json';
     $currentAppointment = json_decode(file_get_contents('db/appointments/' . $paidAppointment));
@@ -97,6 +91,15 @@ if (isset($_GET['txref'])) {
     setAlert('error', 'Your Payment Could not be Completed. Please Try Again!');
     redirect("paybill.php");
   }
-} else {
-  die('No reference supplied');
+} else if (isset($_GET['resp'])) {
+  $resp = json_decode($_GET['resp'], true);
+  $paymentStatus = $resp['data']['status'];
+  $chargeResponsecode = $resp['data']['chargecode'];
+  $chargeAmount = $resp['data']['amount'];
+
+  if (($chargeResponsecode == "00" || $chargeResponsecode == "0") && ($chargeAmount == $amount)  && $paymentStatus == "successful") {
+    setAlert('message', 'Your Payment was successful');
+    redirect("patientsboard.php");
+    die();
+  }
 }
