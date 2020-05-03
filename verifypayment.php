@@ -4,25 +4,23 @@ include_once('functions/redirect.php');
 include_once('functions/email.php');
 include_once('functions/alert.php');
 
-
-
-//test
-$paidAppointment = $email . '-' . $date . '.json';
-$currentAppointment = json_decode(file_get_contents('db/appointments/' . $paidAppointment));
-$currentAppointment->paid = true;
-$currentAppointment->payment_date = date('l, d M, Y');
-print_r($currentAppointment);
-die();
-//test
-
-
-
 $email = $_SESSION['email'];
 $amount = $_SESSION['amount'];
 $fullname = $_SESSION['username'];
 $date = $_SESSION['appointmentDate'];
 
+// //test
+// $paidAppointment = $email . '-' . $date . '.json';
+// print_R($paidAppointment);
+// $currentAppointment = json_decode(file_get_contents('db/appointments/' . $paidAppointment));
+// $currentAppointment->paid = true;
+// $currentAppointment->payment_date = date('l, d M, Y');
+// print_r($currentAppointment);
+// $mailBody = "Hello" . $fullname . ",\nYour payment for an appointment for " . $currentAppointment->nature . " in the " . $currentAppointment->department . " Department set for " . $date . " has been completed.";
+// print_R($mailBody);
+// file_put_contents('db/appointments/' . $paidAppointment, json_encode($currentAppointment));
 // die();
+// //test
 
 if (isset($_GET['txref'])) {
   $ref = $_GET['txref'];
@@ -82,7 +80,7 @@ if (isset($_GET['txref'])) {
     //put the contents back in
     file_put_contents('db/appointments/' . $paidAppointment, json_encode($currentAppointment));
     $mailSubject = 'Confirmation of Bill Payment';
-    $mailBody = "Hello" . $fullname . ",\nYour payment for an appointment for " . $currentAppointment->nature . " in the " . $currentAppointment->department . " Department set for " . $date . " has been completed.";
+    $mailBody = "Hello " . $fullname . ",\nYour payment for an appointment for " . $currentAppointment->nature . " in the " . $currentAppointment->department . " Department set for " . $date . " has been completed.";
     $sendmail = sendEmail($mailSubject, $mailBody, $email);
     if ($sendMail) {
       setAlert('message', 'Your Payment was successful');

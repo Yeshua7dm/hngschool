@@ -44,4 +44,5 @@ if (!isset($_SESSION['userID'])) {
   </div>
 </div>
 <?php
-include_once("lib/footer.php") ?>
+include_once("lib/footer.php");
+$_SESSION['appointmentDate'] = '';
