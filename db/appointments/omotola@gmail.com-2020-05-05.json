@@ -1,0 +1,12 @@
+{
+  "id": 7,
+  "name": "Omotola Emmanuel",
+  "date": "2020-05-05",
+  "time": "09:00",
+  "nature": "Skin Rash",
+  "complaint": "Itchy skin",
+  "department": "Skin Care",
+  "paid": true,
+  "amount_paid": "NGN 700",
+  "payment_date": "Sunday, 03 May, 2020"
+}

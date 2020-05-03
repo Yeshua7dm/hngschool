@@ -1,6 +1,5 @@
 <?php
 session_start();
-include_once("lib/header.php");
 require_once('functions/alert.php');
 require_once('functions/redirect.php');
 
@@ -13,7 +12,6 @@ if (!isset($_SESSION['userID'])) {
 $staff = [];
 // scan through directory
 $arrayOfUsers = scandir("db/users/");
-print_r($arrayOfUsers);
 for ($i = 0; $i < count($arrayOfUsers); $i++) {
   $currentUser = $arrayOfUsers[$i];
   //decode the json files
@@ -21,10 +19,12 @@ for ($i = 0; $i < count($arrayOfUsers); $i++) {
   $userData = json_decode($fileContents);
   // if the deisgnation is MT, push into the staff array
   if ($userData->designation == "Medical Team (MT)") {
-    $member = $userData->first_name . " " . $userData->last_name;
-    array_push($staff, $member);
+    // $member = $userData->first_name . " " . $userData->last_name;
+    array_push($staff, $userData);
   }
 }
+
 // pass the array to the session and route
 $_SESSION['staff'] = $staff;
+
 redirect("allstaff.php");

@@ -14,14 +14,41 @@ if (!isset($_SESSION['userID'])) {
   <div class="row col-6">
     <h4>SNG Hospital: Staff</h4>
   </div>
-  <div class="row col-6">
-    <ul class="list-group list-group-flush">
-      <?php
-      for ($i = 0; $i < count($_SESSION['staff']); $i++) { ?>
-        <li class="list-group-item"><?= "" . $i + 1 . "  " . $_SESSION['staff'][$i] ?></li>
-      <?php } ?>
-    </ul>
+  <div class="row col-12">
+    <?php if (isset($_SESSION['staff']) && !empty($_SESSION['staff'])) { ?>
+      <table class="table table-sm table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Department</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          for ($i = 0; $i < count($_SESSION['staff']); $i++) { ?>
+            <tr>
+              <th scope="row"><?= $i + 1 ?></th>
+              <td><?= $_SESSION['staff'][$i]->first_name ?></td>
+              <td><?= $_SESSION['staff'][$i]->last_name ?></td>
+              <td><?= $_SESSION['staff'][$i]->gender ?></td>
+              <td><?= $_SESSION['staff'][$i]->department ?></td>
+              <td><?= $_SESSION['staff'][$i]->email ?></td>
+            </tr>
+          <?php }
+          ?>
+        </tbody>
+      </table>
+    <?php } else { ?>
+      <p>You have no registered staff</p>
+    <?php }
+    ?>
   </div>
 </div>
+
+
 <?php
 include_once("lib/footer.php") ?>

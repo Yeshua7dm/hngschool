@@ -76,6 +76,7 @@ if (isset($_GET['txref'])) {
     $paidAppointment = $email . '-' . $date . '.json';
     $currentAppointment = json_decode(file_get_contents('db/appointments/' . $paidAppointment));
     $currentAppointment->paid = true;
+    $currentAppointment->amount_paid = "NGN " . $amount;
     $currentAppointment->payment_date = date('l, d M, Y');
     //put the contents back in
     file_put_contents('db/appointments/' . $paidAppointment, json_encode($currentAppointment));
@@ -85,9 +86,11 @@ if (isset($_GET['txref'])) {
     if ($sendMail) {
       setAlert('message', 'Your Payment was successful');
       redirect("patientsboard.php");
+      die();
     } else {
       setAlert('message', 'Your Payment was successful');
       redirect("patientsboard.php");
+      die();
     }
   } else {
     //Dont Give Value and return to Failure page

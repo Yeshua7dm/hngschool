@@ -1,0 +1,12 @@
+{
+  "id": 6,
+  "name": "Omotola Emmanuel",
+  "date": "2020-05-08",
+  "time": "10:05",
+  "nature": "Malaria Scare",
+  "complaint": "Mild Headaches",
+  "department": "General Health",
+  "paid": true,
+  "amount_paid": "NGN 500",
+  "payment_date": "Sunday, 03 May, 2020"
+}

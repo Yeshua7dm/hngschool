@@ -1,12 +1,12 @@
 {
-  "id": 5,
-  "name": "Patient One",
-  "date": "2020-05-07",
-  "time": "11:00",
+  "id": 8,
+  "name": "Omotola Emmanuel",
+  "date": "2020-05-12",
+  "time": "10:45",
   "nature": "Post Natal",
   "complaint": "None",
   "department": "Child Care",
-  "amount_paid": "NGN 5000",
   "paid": true,
+  "amount_paid": "NGN 4000",
   "payment_date": "Sunday, 03 May, 2020"
 }

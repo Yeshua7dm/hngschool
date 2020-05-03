@@ -28,9 +28,10 @@ if (!isset($_SESSION['userID'])) {
   </div>
   <div class="col-8">
     <p>
-      <button class="btn btn-success"><a class="p-2 text-white" href='adduser.php'>Add A New User</a></button>
-      <button class="btn btn-primary"><a class="p-2 text-white" href='fetchstaff.php'>View All Staff</a></button>
-      <button class="btn btn-primary"><a class="p-2 text-white" href='fetchpatients.php'>View All Patients</a></button>
+      <a class="btn btn-success p-2" href='adduser.php'>Add User</a>
+      <a class="btn btn-primary p-2" href='fetchstaff.php'>All Staff</a>
+      <a class="btn btn-primary p-2" href='fetchpatients.php'>Patients</a>
+      <a class="btn btn-secondary p-2" href='fetchpaidappointments.php'>Paid Appointments</a>
     </p>
   </div>
 
