@@ -36,19 +36,29 @@ $appointment = [
   'nature' => $nature,
   'complaint' => $complaint,
   'department' => $department,
+  'paid' => false
 ];
-//push the array into a file saved with email of patient and date of appointment
-file_put_contents("db/appointments/" . $email . "-" . $date . ".json", json_encode($appointment));
+// TODO: check if date selected is greater than current date, if there i, return else book appointment
 
-$subject = "Appointment Booking";
-$message = "You have successfully booked an appointment stated for " . $time . " on " . $date . " with the " . $department . " department. Please keep to time.\nThanks";
-$sendMail = sendEmail($subject, $message, $email);
+$appointments = scandir('db/appointments/');
+$thisAppointment =  $email . "-" . $date . ".json";
 
-// return to dashboard
-if ($sendMail) {
-  setAlert('message', "Appointment Booked! A mail has been sent to you.");
+if (in_array($thisAppointment, $appointments)) {
+  setAlert('error', "There is an appointment for you on this date: " . $date . "! Select another date");
+  redirect("bookappointment.php");
 } else {
-  setAlert('message', "Appointment Booked!");
-}
+  //push the array into a file saved with email of patient and date of appointment
+  file_put_contents("db/appointments/" . $email . "-" . $date . ".json", json_encode($appointment));
 
-redirect("patientsboard.php");
+  $subject = "Appointment Booking";
+  $message = "You have successfully booked an appointment stated for " . $time . " on " . $date . " with the " . $department . " department. Please keep to time.\nThanks";
+  $sendMail = sendEmail($subject, $message, $email);
+
+  // return to dashboard
+  if ($sendMail) {
+    setAlert('message', "Appointment Booked! A mail has been sent to you.");
+  } else {
+    setAlert('message', "Appointment Booked!");
+  }
+  redirect("patientsboard.php");
+}

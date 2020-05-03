@@ -1,1 +1,13 @@
-{"id":1,"first_name":"Super","last_name":"Admin","email":"principal@hng.com","gender":"Male","password":"$2y$10$sZ3tEgS9CR9V0u3aVseasuOX2QO3pcCXv1a3yeq1ecUKlvoIlsJBu","designation":"SuperAdmin","department":"Principal","registrationDate":"Wednesday, 08 Apr, 2020","LastLoggedTime":"03:13am","LastLoggedDate":"Tuesday, 21 Apr, 2020"}
+{
+  "id": 1,
+  "first_name": "Super",
+  "last_name": "Admin",
+  "email": "principal@hng.com",
+  "gender": "Male",
+  "password": "$2y$10$sZ3tEgS9CR9V0u3aVseasuOX2QO3pcCXv1a3yeq1ecUKlvoIlsJBu",
+  "designation": "SuperAdmin",
+  "department": "Principal",
+  "registrationDate": "Wednesday, 08 Apr, 2020",
+  "LastLoggedTime": "07:09pm",
+  "LastLoggedDate": "Friday, 01 May, 2020"
+}

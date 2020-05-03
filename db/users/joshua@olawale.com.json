@@ -1,13 +1,1 @@
-{
-  "id": 2,
-  "first_name": "Joshua",
-  "last_name": "Olawale",
-  "email": "joshua@olawale.com",
-  "gender": "Male",
-  "password": "$2y$10$ajoENO72DDkYBzfTi1GDBeusCoSwhPETqrLCPFHkhMcOB4mUMJvLu",
-  "designation": "Medical Team (MT)",
-  "department": "Child Care",
-  "registrationDate": "Wednesday, 08 Apr, 2020",
-  "LastLoggedTime": "05:33am",
-  "LastLoggedDate": "Tuesday, 21 Apr, 2020"
-}
+{"id":2,"first_name":"Joshua","last_name":"Olawale","email":"joshua@olawale.com","gender":"Male","password":"$2y$10$ajoENO72DDkYBzfTi1GDBeusCoSwhPETqrLCPFHkhMcOB4mUMJvLu","designation":"Medical Team (MT)","department":"Child Care","registrationDate":"Wednesday, 08 Apr, 2020","LastLoggedTime":"07:08pm","LastLoggedDate":"Friday, 01 May, 2020"}

@@ -8,6 +8,7 @@ function printAlert()
   for ($i = 0; $i < count($types); $i++) {
     if (isset($_SESSION[$types[$i]]) && !empty($_SESSION[$types[$i]])) {
       echo "<div class='alert alert-" . $color[$i] . "' role='alert'>" . $_SESSION[$types[$i]] . " </div>";
+      $_SESSION[$types[$i]] = '';
     }
   }
 }

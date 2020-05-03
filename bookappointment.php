@@ -11,7 +11,11 @@ require_once('functions/alert.php');
   <div class="row col-6">
     <p>Book an appointment with a Department of the Hospital</p>
   </div>
-  <div class="row col-6"></div>
+  <div class="row col-6">
+    <?php printAlert();
+    // $_SESSION['error'] = '';
+    ?>
+  </div>
   <div class="row col-6">
     <form action="processappointment.php" method="post">
       <p>

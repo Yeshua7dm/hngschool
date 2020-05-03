@@ -1,1 +1,9 @@
-{"id":3,"name":"Ade Mide","date":"2020-04-30","time":"10:45","nature":"mammary gland check up","complaint":"None","department":"Skin Care"}
+{
+  "id": 3,
+  "name": "Ade Mide",
+  "date": "2020-04-30",
+  "time": "10:45",
+  "nature": "mammary gland check up",
+  "complaint": "None",
+  "department": "Skin Care"
+}

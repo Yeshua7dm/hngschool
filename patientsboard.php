@@ -33,10 +33,13 @@ if (!isset($_SESSION['userID'])) {
 
   <div class="row col-6">
     <p class="m-1">
-      <button class="btn btn-outline-primary"><a class="p-1 text-info" href='bookappointment.php'>Book Appointment</a></button>
+      <a class="p-1 btn btn-outline-primary" href='bookappointment.php'>Book Appointment</a>
     </p>
     <p class="m-1">
-      <button class="btn btn-outline-success"><a class="p-1 text-success" href='paybill.php'>Pay Bill</a></button>
+      <a class="p-1 btn btn-outline-success" href='paybill.php'>Pay Bill</a>
+    </p>
+    <p class="m-1">
+      <a class="p-1 btn btn-outline-success" href='transactions.php'>View Transaction History</a>
     </p>
   </div>
 </div>
