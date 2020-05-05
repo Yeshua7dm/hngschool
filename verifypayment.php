@@ -70,4 +70,11 @@ if (isset($_GET['txref'])) {
     setAlert('error', 'Your Payment Could not be Completed. Please Try Again!');
     redirect("paybill.php");
   }
+} else if (isset($_GET['resp'])) {
+  $resp = json_decode($_GET['resp']);
+  print_r($resp->data->data->status);
+  print_r($resp->data->data->responsecode);
+  if ($resp->data->data->status == 'successful' || $resp->tx->status == 'successful' || $resp->data->data->responsecode == '00' || $resp->data) {
+    redirect("patientsboard.php");
+  }
 }

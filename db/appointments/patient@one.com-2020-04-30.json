@@ -1,10 +1,1 @@
-{
-  "id": 1,
-  "name": "Patient One",
-  "date": "2020-04-30",
-  "time": "15:00",
-  "nature": "Eye check",
-  "complaint": "Itches all over my pupil",
-  "department": "Eye Care",
-  "paid": false
-}
+{"id":1,"name":"Patient One","date":"2020-04-30","time":"15:00","nature":"Eye check","complaint":"Itches all over my pupil","department":"Eye Care","paid":true,"amount_paid":"NGN 1425","payment_date":"Wednesday, 06 May, 2020"}

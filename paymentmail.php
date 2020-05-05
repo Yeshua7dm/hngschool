@@ -22,14 +22,9 @@ $department = $_SESSION['currentDepartment'];
 
 
 $mailSubject = 'Confirmation of Bill Payment';
-$headers = 'FROM: no-reply@test.com' . "\r\n" . "CC: yeshua7dm@gmail.com";
+// $headers = 'FROM: no-reply@test.com' . "\r\n" . "CC: yeshua7dm@gmail.com";
 $mailBody = "Hello " . $fullname . ",\nYour payment for an appointment for " . $nature . " in the " . $department . " Department set for " . $date . " has been completed.";
-// $sendmail = sendEmail($mailSubject, $mailBody, $email);
-$sendmail = mail($email, $mailSubject, $mailBody, $headers);
-if ($sendMail) {
-  setAlert('message', 'Your Payment was successful! Mail has been sent');
-  redirect("patientsboard.php");
-} else {
-  setAlert('message', 'Your Payment was successful; Mail could not be sent');
-  redirect("patientsboard.php");
-}
+sendEmail($mailSubject, $mailBody, $email);
+
+setAlert('message', 'Your Payment was successful! Mail has been sent');
+redirect("patientsboard.php");
