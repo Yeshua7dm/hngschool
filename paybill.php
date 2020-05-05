@@ -53,9 +53,9 @@ $_SESSION['unpaidAppointments'] = $unpaidAppointments;
 
       </form>
 
-    <?php  }  ?>
-
+    <?php } else { ?>
+      <p>You have paid for No Unpaid Appointments</p>
   </div>
 </div>
-<?php
-include_once('lib/footer.php');
+<?php }
+    include_once('lib/footer.php');

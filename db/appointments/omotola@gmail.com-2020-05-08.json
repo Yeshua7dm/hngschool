@@ -6,7 +6,5 @@
   "nature": "Malaria Scare",
   "complaint": "Mild Headaches",
   "department": "General Health",
-  "paid": true,
-  "amount_paid": "NGN 1500",
-  "payment_date": "Sunday, 03 May, 2020"
+  "paid": false
 }
