@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-include_once('functions/token.php');
 include_once('functions/redirect.php');
 include_once('functions/alert.php');
 
@@ -29,7 +27,7 @@ $_SESSION['amount'] = $amount;
 $curl = curl_init();
 
 $amount = $amount;
-$txref = "rave-" . generateToken(); // ensure you generate unique references per transaction.
+$txref = "rave-" . mt_rand(); // ensure you generate unique references per transaction.
 $PBFPubKey = "FLWPUBK_TEST-d4fff0538e6ee48f25bd02ed2a5c136f-X"; // get your public key from the dashboard.
 $redirect_url = "http://localhost/hngschool/verifypayment.php";
 
@@ -68,10 +66,5 @@ if (!$transaction->data && !$transaction->data->link) {
   print_r('API returned error: ' . $transaction->message);
 }
 
-// uncomment out this line if you want to redirect the user to the payment page
-//print_r($transaction->data->message);
-
-
 // redirect to page so User can pay
-// uncomment this line to allow the user redirect to the payment page
 redirect($transaction->data->link);

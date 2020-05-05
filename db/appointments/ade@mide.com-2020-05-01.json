@@ -5,5 +5,6 @@
   "time": "10:05",
   "nature": "Check Up for Skin Cancer",
   "complaint": "Skin has started developing pus",
-  "department": "Skin Care"
+  "department": "Skin Care",
+  "paid": false
 }

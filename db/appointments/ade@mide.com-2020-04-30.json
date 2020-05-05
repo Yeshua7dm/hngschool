@@ -1,9 +1,1 @@
-{
-  "id": 3,
-  "name": "Ade Mide",
-  "date": "2020-04-30",
-  "time": "10:45",
-  "nature": "mammary gland check up",
-  "complaint": "None",
-  "department": "Skin Care"
-}
+{"id":3,"name":"Ade Mide","date":"2020-04-30","time":"10:45","nature":"mammary gland check up","complaint":"None","department":"Skin Care","paid":true,"amount_paid":"NGN 2000","payment_date":"Tuesday, 05 May, 2020"}

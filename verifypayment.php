@@ -1,26 +1,12 @@
 <?php
 session_start();
 include_once('functions/redirect.php');
-include_once('functions/email.php');
 include_once('functions/alert.php');
 
 $email = $_SESSION['email'];
 $amount = $_SESSION['amount'];
 $fullname = $_SESSION['username'];
 $date = $_SESSION['appointmentDate'];
-
-// //test
-// $paidAppointment = $email . '-' . $date . '.json';
-// print_R($paidAppointment);
-// $currentAppointment = json_decode(file_get_contents('db/appointments/' . $paidAppointment));
-// $currentAppointment->paid = true;
-// $currentAppointment->payment_date = date('l, d M, Y');
-// print_r($currentAppointment);
-// $mailBody = "Hello" . $fullname . ",\nYour payment for an appointment for " . $currentAppointment->nature . " in the " . $currentAppointment->department . " Department set for " . $date . " has been completed.";
-// print_R($mailBody);
-// file_put_contents('db/appointments/' . $paidAppointment, json_encode($currentAppointment));
-// die();
-// //test
 
 if (isset($_GET['txref'])) {
   $ref = $_GET['txref'];
@@ -74,32 +60,14 @@ if (isset($_GET['txref'])) {
     $currentAppointment->payment_date = date('l, d M, Y');
     //put the contents back in
     file_put_contents('db/appointments/' . $paidAppointment, json_encode($currentAppointment));
-    $mailSubject = 'Confirmation of Bill Payment';
-    $mailBody = "Hello " . $fullname . ",\nYour payment for an appointment for " . $currentAppointment->nature . " in the " . $currentAppointment->department . " Department set for " . $date . " has been completed.";
-    $sendmail = sendEmail($mailSubject, $mailBody, $email);
-    if ($sendMail) {
-      setAlert('message', 'Your Payment was successful');
-      redirect("patientsboard.php");
-      die();
-    } else {
-      setAlert('message', 'Your Payment was successful');
-      redirect("patientsboard.php");
-      die();
-    }
+    // //put these into the session then route
+    $_SESSION['currentAppointment'] = $currentAppointment->nature;
+    $_SESSION['currentDepartment'] = $currentAppointment->department;
+    //redirect to email sender
+    redirect('paymentmail.php');
   } else {
     //Dont Give Value and return to Failure page
     setAlert('error', 'Your Payment Could not be Completed. Please Try Again!');
     redirect("paybill.php");
-  }
-} else if (isset($_GET['resp'])) {
-  $resp = json_decode($_GET['resp'], true);
-  $paymentStatus = $resp['data']['status'];
-  $chargeResponsecode = $resp['data']['chargecode'];
-  $chargeAmount = $resp['data']['amount'];
-
-  if (($chargeResponsecode == "00" || $chargeResponsecode == "0") && ($chargeAmount == $amount)  && $paymentStatus == "successful") {
-    setAlert('message', 'Your Payment was successful');
-    redirect("patientsboard.php");
-    die();
   }
 }
